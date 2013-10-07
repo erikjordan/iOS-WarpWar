@@ -28,6 +28,7 @@
 	self.scrollView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
 	self.scrollView.minimumZoomScale = 0.5;
 	self.scrollView.maximumZoomScale = 4.0;
+	self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 	
 	// self.scrollView.contentSize = self.hexView.bounds.size; // Apparently don't need to do this anymore, but:
 	// Need a constraint that binds all edges of the hex view to the scroll view parent. Then the conentSize property seems
@@ -49,6 +50,7 @@
 	// http://halmueller.wordpress.com/2008/10/08/a-very-simple-uiscrollview-demo/
 	
 	[self.hexView setNeedsDisplay];
+	[self.scrollView setNeedsDisplay];
 }
 
 

@@ -17,18 +17,36 @@ Drawing options:
 
 @implementation HexView
 
+- (id) initWithFrame:(CGRect)rect
+{
+	self = [super initWithFrame:rect];
+	
+	if (self)
+	{
+		CATiledLayer* tempTiledLayer = (CATiledLayer*)self.layer;
+		tempTiledLayer.levelsOfDetail = 4;
+		tempTiledLayer.levelsOfDetailBias = 4;
+		self.opaque=YES;
+	}
+	
+	return self;
+}
+
 - (void) drawRect:(CGRect)rect
 {
-	// TODO: Should restrict redrawing to rect passed in
-	// TODO: Should redraw opaque if the view set that way
+	[self drawViewInContext:UIGraphicsGetCurrentContext() bounds:self.bounds];
+}
+
+- (void) drawViewInContext:(CGContextRef)context bounds:(CGRect)bounds
+{
+	CGContextSetRGBFillColor(context, 1.0, 1.0, 1.0 ,1.0);
+	CGContextFillRect(context,self.bounds);
 	
 	float size = 25;
-
-	CGContextRef context = UIGraphicsGetCurrentContext();
 	
-	[[UIColor blackColor] setStroke];
+	CGContextSetRGBStrokeColor(context, 0.0, 0.0, 0.0, 1.0);
 	
-	UIBezierPath* hexPath = [self makeHexAt:CGPointMake(0,0) size:size];
+	CGPathRef hexPath = [self makeHexAt:CGPointMake(0,0) size:size context:context];
 	
 	float width = size * 2.0;
 	float height = sqrt(3.0) / 2.0 * width;
@@ -49,7 +67,10 @@ Drawing options:
 		for (int row = 0; row < rows; row++)
 		{
 			CGContextTranslateCTM(context, 0, verticalSpacing);
-			[hexPath stroke];
+			
+			CGContextBeginPath(context);
+			CGContextAddPath(context, hexPath);
+			CGContextStrokePath(context);
 		}
 		
 		float verticalOffset = 0;
@@ -65,9 +86,9 @@ Drawing options:
 	}
 }
 
-- (UIBezierPath*) makeHexAt:(CGPoint)center size:(float)size
+- (CGPathRef) makeHexAt:(CGPoint)center size:(float)size context:(CGContextRef)context
 {
-	UIBezierPath* hexPath = [UIBezierPath bezierPath];
+	CGContextBeginPath(context);
 	
 	for (int vertex = 0; vertex < 6; vertex++)
 	{
@@ -76,18 +97,28 @@ Drawing options:
     float y_i = center.y + size * sin(angle);
 		if (0 == vertex)
 		{
-			[hexPath moveToPoint:CGPointMake(x_i, y_i)];
+			CGContextMoveToPoint(context, x_i, y_i);
 		}
 		else
 		{
-			[hexPath addLineToPoint:CGPointMake(x_i, y_i)];
+			CGContextAddLineToPoint(context, x_i, y_i);
 		}
 	}
-	[hexPath closePath];
-
-	hexPath.lineWidth = 0.5;
+	CGContextClosePath(context);
 	
-	return hexPath;
+	CGPathRef path = CGContextCopyPath(context);
+	return path;
+}
+
+/*
+- (void) drawLayer:(CALayer*)layer inContext:(CGContextRef)context
+{
+}
+*/
+
++ (Class) layerClass
+{
+	return [CATiledLayer class];
 }
 
 @end

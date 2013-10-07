@@ -12,11 +12,11 @@
                         <viewControllerLayoutGuide type="top" id="bd7-Y7-8BL"/>
                         <viewControllerLayoutGuide type="bottom" id="AAD-YW-twy"/>
                     </layoutGuides>
-                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ZA9-dZ-KAK">
+                    <scrollView key="view" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="redraw" minimumZoomScale="0.5" maximumZoomScale="4" id="ZA9-dZ-KAK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <view autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bKH-85-GF9" customClass="HexView">
+                            <view autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="bKH-85-GF9" customClass="HexView">
                                 <rect key="frame" x="0.0" y="0.0" width="436" height="654"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -45,6 +45,7 @@
             </objects>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.40765800400000002" green="1" blue="0.44208242219999999" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
