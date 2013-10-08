@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
@@ -8,36 +8,14 @@
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="bd7-Y7-8BL"/>
-                        <viewControllerLayoutGuide type="bottom" id="AAD-YW-twy"/>
-                    </layoutGuides>
                     <scrollView key="view" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="redraw" minimumZoomScale="0.5" maximumZoomScale="4" id="ZA9-dZ-KAK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <subviews>
-                            <view autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="bKH-85-GF9" customClass="HexView">
-                                <rect key="frame" x="0.0" y="0.0" width="436" height="654"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="654" id="4c7-eV-QaF"/>
-                                    <constraint firstAttribute="width" constant="436" id="a0s-pt-9rW"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="bKH-85-GF9" secondAttribute="bottom" id="0R6-f5-bZb"/>
-                            <constraint firstItem="bKH-85-GF9" firstAttribute="top" secondItem="ZA9-dZ-KAK" secondAttribute="top" id="5A1-bK-OCx"/>
-                            <constraint firstAttribute="trailing" secondItem="bKH-85-GF9" secondAttribute="trailing" id="el0-YV-8vn" userLabel="Horizontal Space - (-79) - Scroll View - Hex View"/>
-                            <constraint firstItem="bKH-85-GF9" firstAttribute="leading" secondItem="ZA9-dZ-KAK" secondAttribute="leading" id="tw4-4q-4of"/>
-                        </constraints>
                         <connections>
                             <outlet property="delegate" destination="vXZ-lx-hvc" id="GGx-ao-x5P"/>
                         </connections>
                     </scrollView>
                     <connections>
-                        <outlet property="hexView" destination="bKH-85-GF9" id="0cQ-Kk-8C9"/>
                         <outlet property="scrollView" destination="ZA9-dZ-KAK" id="Ry5-8p-dCl"/>
                     </connections>
                 </viewController>

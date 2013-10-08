@@ -11,7 +11,7 @@
 
 @interface ViewController ()
 
-@property (weak, nonatomic) IBOutlet HexView *hexView;
+@property (nonatomic) IBOutlet HexView *hexView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
@@ -26,13 +26,25 @@
 	// http://stackoverflow.com/questions/13499467/uiscrollview-doesnt-use-autolayout-constraints
 	
 	self.scrollView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
-	self.scrollView.minimumZoomScale = 0.5;
-	self.scrollView.maximumZoomScale = 4.0;
-	self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+	self.scrollView.maximumZoomScale = 2.0;
 	
 	// self.scrollView.contentSize = self.hexView.bounds.size; // Apparently don't need to do this anymore, but:
 	// Need a constraint that binds all edges of the hex view to the scroll view parent. Then the conentSize property seems
 	// to be set automatically.
+	
+	// This is the trick to get this all working: you must add the view manually, not via the storyboard/xib
+	self.hexView = [[HexView alloc] initWithFrame:CGRectMake(0., 0., 500., 800.)]; // Frame is moot as we override it anyway.
+	[self.view addSubview:self.hexView];
+	self.scrollView.contentSize = self.hexView.bounds.size; // This only works if autolayout turned off
+	
+	// Now we can set our minimum scale so the user can't zoom out further than matching the width of the hexView to the window.
+	self.scrollView.minimumZoomScale = self.scrollView.frame.size.width / self.hexView.frame.size.width;
+}
+
+- (UIStatusBarStyle) preferredStatusBarStyle
+{
+	// By default iOS 7 lets individual controllers set the status bar style.
+	return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - UIScrollViewDelegate delegate methods
@@ -41,17 +53,5 @@
 {
 	return self.hexView;
 }
-
-- (void) scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale
-{
-	NSLog(@"New scale: %f", scale);
-	
-	// https://developer.apple.com/library/ios/documentation/windowsviews/conceptual/UIScrollView_pg/ZoomZoom/ZoomZoom.html
-	// http://halmueller.wordpress.com/2008/10/08/a-very-simple-uiscrollview-demo/
-	
-	[self.hexView setNeedsDisplay];
-	[self.scrollView setNeedsDisplay];
-}
-
 
 @end
