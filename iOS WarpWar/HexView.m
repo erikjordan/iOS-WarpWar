@@ -16,7 +16,7 @@ Drawing options:
 */
 
 float size = 25;
-int columns = 20;
+int columns = 15;
 int rows = 22;
 
 @implementation HexView
