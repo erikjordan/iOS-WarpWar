@@ -10,4 +10,6 @@
 
 @interface HexView : UIView
 
+- (CGPoint) roundToHexCenter:(CGPoint)point;
+
 @end

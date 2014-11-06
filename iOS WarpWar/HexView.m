@@ -15,7 +15,17 @@ Drawing options:
  UIKit has some drawing objects that wrap the CG/Quartz stuff
 */
 
-float size = 25;
+// Help with hexes
+// http://www.redblobgames.com/grids/hexagons/
+// http://blog.ruslans.com/2011/02/hexagonal-grid-math.html
+// http://devmag.org.za/2013/08/31/geometry-with-hex-coordinates/
+// http://www.gamedev.net/page/resources/_/technical/game-programming/coordinates-in-hexagon-based-tile-maps-r1800
+
+// TODO: Optimize out all the constant sqrts
+// NOTE: We assume a zero-based count for rows/columns coordinates
+// NOTE: We are doing an "even-q" vertical layout
+
+float size = 25.0;
 int columns = 15;
 int rows = 22;
 
@@ -109,9 +119,53 @@ int rows = 22;
 	}
 }
 
+- (CGPoint) roundToHexCenter:(CGPoint)point
+{
+	// TODO These should be global constants, methods, or inlines or macros or somesuch
+	float width = size * 2.0;
+	float height = sqrt(3.0) / 2.0 * width;
+	
+	// Adjust point to get rounding to work right
+	CGPoint sourcePoint = CGPointMake(point.x - size, point.y - height);
+
+	// Convert pixel to hex position
+	float q = 2.0 / 3.0 * sourcePoint.x / size;
+	float r = ((-1.0 / 3.0 * sourcePoint.x) + (1.0 / 3.0 * sqrt(3.0) * sourcePoint.y)) / size;
+	
+	// Round, adjust the hex position (in axial coordinates)
+	long qlong = lroundf(q);
+	long rlong = lroundf(r);
+	
+	NSLog(@"Axial(q, r): %ld, %ld", qlong, rlong);
+
+	// Convert axial to cube coordinates
+	long cubex = qlong;
+	long cubez = rlong;
+	// long cubey = -cubex-cubez; Not needed for subsequent calculations.
+	
+	// Convert cube to even-q offset coordinates and pin to map dimensions
+	long offsetx = MIN(MAX(cubex, 0), columns - 1);
+	long offsety = MIN(MAX(cubez + (cubex + (cubex & 1)) / 2, 0), rows - 1);
+	
+	NSLog(@"Offset(x, y): %ld, %ld", offsetx, offsety);
+	
+	// Convert back into pixel location (TODO To do this don't really need to convert to offset location, above. Could probably just work in axial coordinates, as article recommends. But, we would need to figure out how to do the pinning to map dimensions with axial coordinates).
+	float x = (size * 3.0 / 2.0 * offsetx) + size;
+	float y = (size * sqrt(3.0) * (offsety - 0.5 * (offsetx & 1))) + height;
+	
+	NSLog(@"Pixel(x, y): %f, %f", x, y);
+
+	return CGPointMake(x, y);
+}
+
 + (Class) layerClass
 {
 	return [CATiledLayer class];
+}
+
+- (BOOL)canBecomeFirstResponder
+{
+	return YES;
 }
 
 @end
