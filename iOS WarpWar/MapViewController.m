@@ -74,16 +74,6 @@
 					}];
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-	[super viewDidAppear:animated];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-	[super viewWillAppear:animated];
-}
-
 - (IBAction) imageMoved:(id)sender withEvent:(UIEvent*)event
 {
 	// TODO: Add automatic scrolling when dragging to edge
@@ -120,14 +110,7 @@
 
 - (void) editChit
 {
-	GKMatchRequest *request = [[GKMatchRequest alloc] init];
-	request.minPlayers = 2;
-	request.maxPlayers = 2;
- 
-	GKTurnBasedMatchmakerViewController *mmvc = [[GKTurnBasedMatchmakerViewController alloc] initWithMatchRequest:request];
-	mmvc.turnBasedMatchmakerDelegate = self;
- 
-	[self presentViewController:mmvc animated:YES completion:nil];
+	[self performSegueWithIdentifier:@"editChit" sender:nil];
 }
 
 - (UIStatusBarStyle) preferredStatusBarStyle
@@ -139,6 +122,18 @@
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (IBAction)didPressMatchmaking:(id)sender
+{
+	GKMatchRequest *request = [[GKMatchRequest alloc] init];
+	request.minPlayers = 2;
+	request.maxPlayers = 2;
+ 
+	GKTurnBasedMatchmakerViewController *mmvc = [[GKTurnBasedMatchmakerViewController alloc] initWithMatchRequest:request];
+	mmvc.turnBasedMatchmakerDelegate = self;
+ 
+	[self presentViewController:mmvc animated:YES completion:nil];
 }
 
 #pragma mark - UIScrollViewDelegate delegate methods
