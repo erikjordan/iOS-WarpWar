@@ -14,7 +14,7 @@
 @interface MapViewController ()
 
 @property (nonatomic) HexView *hexView;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 
@@ -27,6 +27,11 @@
 	// Using autolayout with the scroller seems to cause problems
 	// http://stackoverflow.com/questions/13499467/uiscrollview-doesnt-use-autolayout-constraints
 	
+	// Put scroll view in subview
+	UIView* newParentView = [[UIView alloc] initWithFrame:self.scrollView.frame];
+	self.view = newParentView;
+	[self.view addSubview:self.scrollView];
+	
 	self.scrollView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
 	self.scrollView.maximumZoomScale = 2.0;
 	
@@ -37,8 +42,8 @@
 	// This is the trick to get this all working: you must add the view manually, not via the storyboard/xib
 	self.hexView = [[HexView alloc] initWithFrame:CGRectMake(0., 0., 500., 800.)]; // Frame is moot as we override it anyway.
 	
-	[self.view addSubview:self.hexView];
-	self.scrollView.contentSize = self.hexView.bounds.size; // This only works if autolayout turned off
+	[self.scrollView addSubview:self.hexView];
+	self.scrollView.contentSize = self.hexView.bounds.size;
 	
 	// Now we can set our minimum scale so the user can't zoom out further than matching the width of the hexView to the window.
 	self.scrollView.minimumZoomScale = self.scrollView.frame.size.width / self.hexView.frame.size.width;
@@ -70,6 +75,11 @@
 							// TODO: Handle case where user cancels the login
 						}
 					}];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
 }
 
 - (void)viewWillAppear:(BOOL)animated

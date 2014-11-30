@@ -10,8 +10,8 @@
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="MapViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="EDS-JD-eQ1"/>
-                        <viewControllerLayoutGuide type="bottom" id="QAS-CI-V2B"/>
+                        <viewControllerLayoutGuide type="top" id="cEx-h9-5Po"/>
+                        <viewControllerLayoutGuide type="bottom" id="kX3-aO-re9"/>
                     </layoutGuides>
                     <scrollView key="view" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="redraw" minimumZoomScale="0.5" maximumZoomScale="4" id="ZA9-dZ-KAK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
