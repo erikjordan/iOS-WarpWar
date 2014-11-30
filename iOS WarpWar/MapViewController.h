@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MapViewController.h
 //  iOS WarpWar
 //
 //  Created by Erik Jordan on 10/4/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController <UIScrollViewDelegate>
+@interface MapViewController : UIViewController <UIScrollViewDelegate, GKTurnBasedMatchmakerViewControllerDelegate>
 
 @end

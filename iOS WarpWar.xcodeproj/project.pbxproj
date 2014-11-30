@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		036A0C1C1A0C39EF009DA91E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036A0C1B1A0C39EF009DA91E /* GameKit.framework */; };
+		036A0C1F1A0C6C13009DA91E /* GameEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 036A0C1E1A0C6C13009DA91E /* GameEngine.m */; };
 		03AD14091800F2180007BF61 /* HexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03AD14081800F2180007BF61 /* HexView.m */; };
 		03E0FE4C17FFB114006F9451 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03E0FE4B17FFB114006F9451 /* Foundation.framework */; };
 		03E0FE4E17FFB114006F9451 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03E0FE4D17FFB114006F9451 /* CoreGraphics.framework */; };
@@ -15,7 +17,7 @@
 		03E0FE5817FFB114006F9451 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E0FE5717FFB114006F9451 /* main.m */; };
 		03E0FE5C17FFB114006F9451 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E0FE5B17FFB114006F9451 /* AppDelegate.m */; };
 		03E0FE5F17FFB114006F9451 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03E0FE5D17FFB114006F9451 /* Main.storyboard */; };
-		03E0FE6217FFB114006F9451 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E0FE6117FFB114006F9451 /* ViewController.m */; };
+		03E0FE6217FFB114006F9451 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E0FE6117FFB114006F9451 /* MapViewController.m */; };
 		03E0FE6417FFB114006F9451 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03E0FE6317FFB114006F9451 /* Images.xcassets */; };
 		03E0FE6B17FFB115006F9451 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03E0FE6A17FFB115006F9451 /* XCTest.framework */; };
 		03E0FE6C17FFB115006F9451 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03E0FE4B17FFB114006F9451 /* Foundation.framework */; };
@@ -35,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		036A0C1B1A0C39EF009DA91E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		036A0C1D1A0C6C13009DA91E /* GameEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameEngine.h; sourceTree = "<group>"; };
+		036A0C1E1A0C6C13009DA91E /* GameEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameEngine.m; sourceTree = "<group>"; };
 		03AD14071800F2180007BF61 /* HexView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexView.h; sourceTree = "<group>"; };
 		03AD14081800F2180007BF61 /* HexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexView.m; sourceTree = "<group>"; };
 		03E0FE4817FFB114006F9451 /* iOS WarpWar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS WarpWar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,8 +53,8 @@
 		03E0FE5A17FFB114006F9451 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		03E0FE5B17FFB114006F9451 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		03E0FE5E17FFB114006F9451 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		03E0FE6017FFB114006F9451 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		03E0FE6117FFB114006F9451 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		03E0FE6017FFB114006F9451 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		03E0FE6117FFB114006F9451 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		03E0FE6317FFB114006F9451 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		03E0FE6917FFB115006F9451 /* iOS WarpWarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS WarpWarTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03E0FE6A17FFB115006F9451 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -66,6 +71,7 @@
 				03E0FE4E17FFB114006F9451 /* CoreGraphics.framework in Frameworks */,
 				03E0FE5017FFB114006F9451 /* UIKit.framework in Frameworks */,
 				03E0FE4C17FFB114006F9451 /* Foundation.framework in Frameworks */,
+				036A0C1C1A0C39EF009DA91E /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +100,8 @@
 		03AD14051800F1820007BF61 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				036A0C1D1A0C6C13009DA91E /* GameEngine.h */,
+				036A0C1E1A0C6C13009DA91E /* GameEngine.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -101,8 +109,8 @@
 		03AD14061800F1910007BF61 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				03E0FE6017FFB114006F9451 /* ViewController.h */,
-				03E0FE6117FFB114006F9451 /* ViewController.m */,
+				03E0FE6017FFB114006F9451 /* MapViewController.h */,
+				03E0FE6117FFB114006F9451 /* MapViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -129,6 +137,7 @@
 		03E0FE4A17FFB114006F9451 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				036A0C1B1A0C39EF009DA91E /* GameKit.framework */,
 				03E0FE4B17FFB114006F9451 /* Foundation.framework */,
 				03E0FE4D17FFB114006F9451 /* CoreGraphics.framework */,
 				03E0FE4F17FFB114006F9451 /* UIKit.framework */,
@@ -230,6 +239,11 @@
 				TargetAttributes = {
 					03E0FE4717FFB114006F9451 = {
 						DevelopmentTeam = UXCXL4U5R3;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 					03E0FE6817FFB115006F9451 = {
 						TestTargetID = 03E0FE4717FFB114006F9451;
@@ -282,8 +296,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				03AD14091800F2180007BF61 /* HexView.m in Sources */,
-				03E0FE6217FFB114006F9451 /* ViewController.m in Sources */,
+				03E0FE6217FFB114006F9451 /* MapViewController.m in Sources */,
 				03E0FE5C17FFB114006F9451 /* AppDelegate.m in Sources */,
+				036A0C1F1A0C6C13009DA91E /* GameEngine.m in Sources */,
 				03E0FE5817FFB114006F9451 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,22 +1,24 @@
 //
-//  ViewController.m
+//  MapViewController.m
 //  iOS WarpWar
 //
 //  Created by Erik Jordan on 10/4/13.
 //  Copyright (c) 2013 Erik Jordan. All rights reserved.
 //
 
+#import "GameEngine.h"
+#import <GameKit/GameKit.h>
 #import "HexView.h"
-#import "ViewController.h"
+#import "MapViewController.h"
 
-@interface ViewController ()
+@interface MapViewController ()
 
 @property (nonatomic) HexView *hexView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 
-@implementation ViewController
+@implementation MapViewController
 
 - (void)viewDidLoad
 {
@@ -55,7 +57,24 @@
 	[button2 addTarget:self action:@selector(imageTapped:withEvent:) forControlEvents:UIControlEventTouchDownRepeat];
 	
 	[self.hexView addSubview:button2];
+	
+	[[NSNotificationCenter defaultCenter] addObserverForName:GameCenterLoginNeededName
+			object:nil
+			queue:nil
+			usingBlock:
+					^(NSNotification* notification)
+					{
+						if ([GameEngine sharedInstance].authenticationNeeded)
+						{
+							[self presentViewController:[GameEngine sharedInstance].authenticationViewController animated:YES completion:nil];
+							// TODO: Handle case where user cancels the login
+						}
+					}];
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
 }
 
 - (IBAction) imageMoved:(id)sender withEvent:(UIEvent*)event
@@ -94,7 +113,14 @@
 
 - (void) editChit
 {
-	
+	GKMatchRequest *request = [[GKMatchRequest alloc] init];
+	request.minPlayers = 2;
+	request.maxPlayers = 2;
+ 
+	GKTurnBasedMatchmakerViewController *mmvc = [[GKTurnBasedMatchmakerViewController alloc] initWithMatchRequest:request];
+	mmvc.turnBasedMatchmakerDelegate = self;
+ 
+	[self presentViewController:mmvc animated:YES completion:nil];
 }
 
 - (UIStatusBarStyle) preferredStatusBarStyle
@@ -103,11 +129,40 @@
 	return UIStatusBarStyleLightContent;
 }
 
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - UIScrollViewDelegate delegate methods
 
 - (UIView*) viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
 	return self.hexView;
+}
+
+#pragma mark - GKTurnBasedMatchmakerViewControllerDelegate
+
+// TODO: Move these delegate methods to own class, or GameEngine?
+
+- (void)turnBasedMatchmakerViewControllerWasCancelled:(GKTurnBasedMatchmakerViewController *)viewController
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)turnBasedMatchmakerViewController:(GKTurnBasedMatchmakerViewController *)viewController didFindMatch:(GKTurnBasedMatch *)match
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)turnBasedMatchmakerViewController:(GKTurnBasedMatchmakerViewController *)viewController didFailWithError:(NSError *)error
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)turnBasedMatchmakerViewController:(GKTurnBasedMatchmakerViewController *)viewController playerQuitForMatch:(GKTurnBasedMatch *)match
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
