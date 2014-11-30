@@ -26,11 +26,8 @@
 	
 	// Using autolayout with the scroller seems to cause problems
 	// http://stackoverflow.com/questions/13499467/uiscrollview-doesnt-use-autolayout-constraints
-	
-	// Put scroll view in subview
-	UIView* newParentView = [[UIView alloc] initWithFrame:self.scrollView.frame];
-	self.view = newParentView;
-	[self.view addSubview:self.scrollView];
+	// On second thought, not sure this applies, it may have more to do about when using constraints
+	// *within* a scroll view, not around it.
 	
 	self.scrollView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
 	self.scrollView.maximumZoomScale = 2.0;
