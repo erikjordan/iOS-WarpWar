@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0301A25D1A2BB83900AE9ABE /* ShipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0301A25C1A2BB83900AE9ABE /* ShipViewController.m */; };
+		0301A2601A2BF54800AE9ABE /* ShipEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0301A25F1A2BF54800AE9ABE /* ShipEditController.m */; };
 		036A0C1C1A0C39EF009DA91E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036A0C1B1A0C39EF009DA91E /* GameKit.framework */; };
 		036A0C1F1A0C6C13009DA91E /* GameEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 036A0C1E1A0C6C13009DA91E /* GameEngine.m */; };
 		03AD14091800F2180007BF61 /* HexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03AD14081800F2180007BF61 /* HexView.m */; };
@@ -40,6 +41,8 @@
 /* Begin PBXFileReference section */
 		0301A25B1A2BB83900AE9ABE /* ShipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipViewController.h; sourceTree = "<group>"; };
 		0301A25C1A2BB83900AE9ABE /* ShipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipViewController.m; sourceTree = "<group>"; };
+		0301A25E1A2BF54800AE9ABE /* ShipEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipEditController.h; sourceTree = "<group>"; };
+		0301A25F1A2BF54800AE9ABE /* ShipEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipEditController.m; sourceTree = "<group>"; };
 		036A0C1B1A0C39EF009DA91E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		036A0C1D1A0C6C13009DA91E /* GameEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameEngine.h; sourceTree = "<group>"; };
 		036A0C1E1A0C6C13009DA91E /* GameEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameEngine.m; sourceTree = "<group>"; };
@@ -116,6 +119,8 @@
 				03E0FE6117FFB114006F9451 /* MapViewController.m */,
 				0301A25B1A2BB83900AE9ABE /* ShipViewController.h */,
 				0301A25C1A2BB83900AE9ABE /* ShipViewController.m */,
+				0301A25E1A2BF54800AE9ABE /* ShipEditController.h */,
+				0301A25F1A2BF54800AE9ABE /* ShipEditController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -303,6 +308,7 @@
 				0301A25D1A2BB83900AE9ABE /* ShipViewController.m in Sources */,
 				03AD14091800F2180007BF61 /* HexView.m in Sources */,
 				03E0FE6217FFB114006F9451 /* MapViewController.m in Sources */,
+				0301A2601A2BF54800AE9ABE /* ShipEditController.m in Sources */,
 				03E0FE5C17FFB114006F9451 /* AppDelegate.m in Sources */,
 				036A0C1F1A0C6C13009DA91E /* GameEngine.m in Sources */,
 				03E0FE5817FFB114006F9451 /* main.m in Sources */,
