@@ -6,6 +6,6 @@ target 'iOS WarpWar' do
 end
 
 target 'iOS WarpWarTests' do
-
+    pod 'Parse', '1.6.4'
 end
 

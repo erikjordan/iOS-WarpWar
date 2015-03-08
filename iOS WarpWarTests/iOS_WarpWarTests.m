@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Erik Jordan. All rights reserved.
 //
 
+#import <Parse/Parse.h>
 #import <XCTest/XCTest.h>
 
 @interface iOS_WarpWarTests : XCTestCase
@@ -26,7 +27,17 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)setupParse
+{
+    // Initialize Parse.
+    [Parse setApplicationId:@"x3iSx1sQyIVwi6r4CKRPwo68M747RGUoDK7UgWNy"
+                  clientKey:@"hjRYeWpu9nNE83yf3snbDXYUj5fHvzHBCn9Sn5hQ"];
+ 
+    // [Optional] Track statistics around application opens.
+    // [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+}
+
+- (void)testParse
 {
     XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
 }

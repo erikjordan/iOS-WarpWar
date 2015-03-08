@@ -413,6 +413,7 @@
 				<string>03E0FE4F17FFB114006F9451</string>
 				<string>03E0FE6A17FFB115006F9451</string>
 				<string>1C264A88193D7EE413F8896D</string>
+				<string>99F0460E3862B6767E44C0CC</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -721,6 +722,7 @@
 				<string>03E0FE6B17FFB115006F9451</string>
 				<string>03E0FE6D17FFB115006F9451</string>
 				<string>03E0FE6C17FFB115006F9451</string>
+				<string>5AD80D33DD29CCDD671A66FD</string>
 			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
@@ -746,9 +748,11 @@
 			<string>03E0FE7D17FFB115006F9451</string>
 			<key>buildPhases</key>
 			<array>
+				<string>F671BD5CCAFCD9A5CA8A9CC5</string>
 				<string>03E0FE6517FFB115006F9451</string>
 				<string>03E0FE6617FFB115006F9451</string>
 				<string>03E0FE6717FFB115006F9451</string>
+				<string>DBD173759C14C33A6DE72945</string>
 			</array>
 			<key>buildRules</key>
 			<array/>
@@ -1153,6 +1157,8 @@
 		</dict>
 		<key>03E0FE7E17FFB115006F9451</key>
 		<dict>
+			<key>baseConfigurationReference</key>
+			<string>7FF3130EE80A8CE659D0B976</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>BUNDLE_LOADER</key>
@@ -1188,6 +1194,8 @@
 		</dict>
 		<key>03E0FE7F17FFB115006F9451</key>
 		<dict>
+			<key>baseConfigurationReference</key>
+			<string>9A89B63455A009A2CF053533</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>BUNDLE_LOADER</key>
@@ -1268,6 +1276,28 @@
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
 		</dict>
+		<key>5AD80D33DD29CCDD671A66FD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>99F0460E3862B6767E44C0CC</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>7FF3130EE80A8CE659D0B976</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-iOS WarpWarTests.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-iOS WarpWarTests/Pods-iOS WarpWarTests.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>94A28C88F61D6739F436F98D</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -1283,12 +1313,42 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>99F0460E3862B6767E44C0CC</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods-iOS WarpWarTests.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>9A89B63455A009A2CF053533</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-iOS WarpWarTests.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-iOS WarpWarTests/Pods-iOS WarpWarTests.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>B748039A28A0BC954A1D2D08</key>
 		<dict>
 			<key>children</key>
 			<array>
 				<string>312EC22564C06CD0EF16DD0B</string>
 				<string>94A28C88F61D6739F436F98D</string>
+				<string>7FF3130EE80A8CE659D0B976</string>
+				<string>9A89B63455A009A2CF053533</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -1327,12 +1387,66 @@ fi
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
 		</dict>
+		<key>DBD173759C14C33A6DE72945</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-iOS WarpWarTests/Pods-iOS WarpWarTests-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
 		<key>EDBF72488115CE3F30DAB8CA</key>
 		<dict>
 			<key>fileRef</key>
 			<string>1C264A88193D7EE413F8896D</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>F671BD5CCAFCD9A5CA8A9CC5</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>
