@@ -16,7 +16,7 @@ Drawing options:
 */
 
 // Help with hexes
-// http://www.redblobgames.com/grids/hexagons/
+// MAIN ARTICLE WE'RE USING: http://www.redblobgames.com/grids/hexagons/
 // http://blog.ruslans.com/2011/02/hexagonal-grid-math.html
 // http://devmag.org.za/2013/08/31/geometry-with-hex-coordinates/
 // http://www.gamedev.net/page/resources/_/technical/game-programming/coordinates-in-hexagon-based-tile-maps-r1800
@@ -121,6 +121,16 @@ int rows = 22;
 
 - (CGPoint) roundToHexCenter:(CGPoint)point
 {
+    NSIndexPath* path = [self roundToOffsetFromPixelCoordinates:point];
+
+    // Convert back into pixel location (TODO To do this don't really need to convert to offset location, above. Could probably just work in axial coordinates, as article recommends. But, we would need to figure out how to do the pinning to map dimensions with axial coordinates).
+    return [self pointFromOffsetX:path.section offsetY:path.row];
+}
+
+// TODO: This conversion maybe shouldn't be in map, because requires use of model objects
+// Maybe we need a "map" object on top of the view.
+- (NSIndexPath*)roundToOffsetFromPixelCoordinates:(CGPoint)point
+{
 	// TODO These should be global constants, methods, or inlines or macros or somesuch
 	float width = size * 2.0;
 	float height = sqrt(3.0) / 2.0 * width;
@@ -148,10 +158,20 @@ int rows = 22;
 	long offsety = MIN(MAX(cubez + (cubex + (cubex & 1)) / 2, 0), rows - 1);
 	
 	NSLog(@"Offset(x, y): %ld, %ld", offsetx, offsety);
-	
-	// Convert back into pixel location (TODO To do this don't really need to convert to offset location, above. Could probably just work in axial coordinates, as article recommends. But, we would need to figure out how to do the pinning to map dimensions with axial coordinates).
-	float x = (size * 3.0 / 2.0 * offsetx) + size;
-	float y = (size * sqrt(3.0) * (offsety - 0.5 * (offsetx & 1))) + height;
+
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:offsety inSection:offsetx];
+    
+    return indexPath;
+}
+
+- (CGPoint)pointFromOffsetX:(NSUInteger)offsetX offsetY:(NSUInteger)offsetY
+{
+    // TODO These should be global constants, methods, or inlines or macros or somesuch
+    float width = size * 2.0;
+    float height = sqrt(3.0) / 2.0 * width;
+
+    float x = (size * 3.0 / 2.0 * offsetX) + size;
+	float y = (size * sqrt(3.0) * (offsetY - 0.5 * (offsetX & 1))) + height;
 	
 	NSLog(@"Pixel(x, y): %f, %f", x, y);
 

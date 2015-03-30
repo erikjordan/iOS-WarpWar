@@ -32,6 +32,11 @@
                                             <action selector="didPressMatchmaking:" destination="vXZ-lx-hvc" id="hr4-A0-iXU"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem systemItem="save" id="oTZ-yl-Xj3">
+                                        <connections>
+                                            <action selector="didPressSaveGame:" destination="vXZ-lx-hvc" id="qbH-7q-tN3"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="HxX-b7-hAB"/>
                                     <barButtonItem systemItem="add" id="kVb-lK-YQY">
                                         <connections>

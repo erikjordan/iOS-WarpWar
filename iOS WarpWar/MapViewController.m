@@ -6,15 +6,18 @@
 //  Copyright (c) 2013 Erik Jordan. All rights reserved.
 //
 
-#import "GameEngine.h"
 #import <GameKit/GameKit.h>
+
+#import "GameEngine.h"
 #import "HexView.h"
 #import "MapViewController.h"
+#import "Ship.h"
 
 @interface MapViewController ()
 
 @property (nonatomic) HexView *hexView;
 @property (nonatomic) IBOutlet UIScrollView *scrollView;
+@property NSMutableDictionary* buttonToShipLookup;
 
 @end
 
@@ -23,6 +26,10 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+    
+    self.buttonToShipLookup = [[NSMutableDictionary alloc] init];
+    
+    // TODO: Fix the toolbar obscuring the map.
 	
 	// Using autolayout with the scroller seems to cause problems
 	// http://stackoverflow.com/questions/13499467/uiscrollview-doesnt-use-autolayout-constraints
@@ -44,22 +51,7 @@
 	
 	// Now we can set our minimum scale so the user can't zoom out further than matching the width of the hexView to the window.
 	self.scrollView.minimumZoomScale = self.scrollView.frame.size.width / self.hexView.frame.size.width;
-	
-	UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(25, 25, 35, 35)];
-	[button setImage:[UIImage imageNamed:@"Token"] forState:UIControlStateNormal];
-//	[button addTarget:self action:@selector(imageTouch:withEvent:) forControlEvents:UIControlEventTouchDown];
-	[button addTarget:self action:@selector(imageMoved:withEvent:) forControlEvents:UIControlEventTouchDragInside];
-	[button addTarget:self action:@selector(imageTapped:withEvent:) forControlEvents:UIControlEventTouchDownRepeat];
-	
-	[self.hexView addSubview:button];
-	
-	UIButton* button2 = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 35, 35)];
-	[button2 setImage:[UIImage imageNamed:@"Token2"] forState:UIControlStateNormal];
-	[button2 addTarget:self action:@selector(imageMoved:withEvent:) forControlEvents:UIControlEventTouchDragInside];
-	[button2 addTarget:self action:@selector(imageTapped:withEvent:) forControlEvents:UIControlEventTouchDownRepeat];
-	
-	[self.hexView addSubview:button2];
-	
+    
 	[[NSNotificationCenter defaultCenter] addObserverForName:GameCenterLoginNeededName
 			object:nil
 			queue:nil
@@ -74,7 +66,69 @@
 					}];
 }
 
-- (IBAction) imageMoved:(id)sender withEvent:(UIEvent*)event
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self loadGame];
+}
+
+- (void)addGamePieces
+{
+    // Place each piece on the board
+    for (Ship* ship in [GameEngine sharedInstance].currentGame.player1Ships)
+    {
+        [ship fetchInBackgroundWithBlock:
+            ^(PFObject *object, NSError *error)
+            {
+                [self placeShipOnMap:ship];
+            }];
+    }
+
+    for (Ship* ship in [GameEngine sharedInstance].currentGame.player2Ships)
+    {
+        [ship fetchInBackgroundWithBlock:
+           ^(PFObject *object, NSError *error)
+            {
+                [self placeShipOnMap:ship];
+            }];
+    }
+}
+
+- (void)placeShipOnMap:(Ship*)ship
+{
+	UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)]; // Set location below, rather than here
+    
+	[button setImage:[UIImage imageNamed:@"Token"] forState:UIControlStateNormal];
+//	[button addTarget:self action:@selector(imageTouch:withEvent:) forControlEvents:UIControlEventTouchDown];
+	[button addTarget:self action:@selector(imageMoved:withEvent:) forControlEvents:UIControlEventTouchDragInside];
+	[button addTarget:self action:@selector(imageTapped:withEvent:) forControlEvents:UIControlEventTouchDownRepeat];
+    
+    button.center = [self.hexView pointFromOffsetX:ship.xLocation offsetY:ship.yLocation];
+
+    // TODO: Should really encapsule the ugliness around this...
+    self.buttonToShipLookup[[NSValue valueWithNonretainedObject:button]] = ship;
+    [self.hexView addSubview:button];
+}
+
+- (void)loadGame
+{
+    // TODO: Move all this to GameEngine, or some store object, or ??
+    Game* game = [Game objectWithoutDataWithObjectId:@"CcIpd41iJB"];
+    [GameEngine sharedInstance].currentGame = game;
+    
+    [game fetchInBackgroundWithBlock:
+         ^(PFObject *object, NSError *error)
+         {
+             // TODO: For now, we will just preload these. Really, should probably do something cleaner (synchronous?)
+             [game.player1 fetchIfNeededInBackground];
+             [game.player2 fetchIfNeededInBackground];
+
+             [self addGamePieces];
+        }];
+}
+
+- (IBAction) imageMoved:(UIButton*)sender withEvent:(UIEvent*)event
 {
 	// TODO: Add automatic scrolling when dragging to edge
 	
@@ -82,8 +136,20 @@
 	UIControl *control = sender;
 	
 	NSLog(@"Scroll view scale: %f", self.scrollView.zoomScale);
+    
+    NSIndexPath* path = [self.hexView roundToOffsetFromPixelCoordinates:point];
+    
+    // Get ship for the image
+    Ship* ship = self.buttonToShipLookup[[NSValue valueWithNonretainedObject:sender]];
+    
+    // Move ship to this location
+    ship.xLocation = path.section;
+    ship.yLocation = path.row;
+    [ship saveInBackground];
+    
+    // TODO: Here could call match's - saveCurrentTurnWithMatchData:completionHandler: to send updates to other player
 	
-	CGPoint quantizedPoint = [self.hexView roundToHexCenter:point];
+	CGPoint quantizedPoint = [self.hexView pointFromOffsetX:path.section offsetY:path.row];
 	
 	// Convert point to coordinates of this view
 	
@@ -126,14 +192,73 @@
 
 - (IBAction)didPressMatchmaking:(id)sender
 {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Title"
+            message:@"Message"
+            preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"New Game"
+            style:UIAlertActionStyleDefault
+            handler:
+                ^(UIAlertAction *action)
+                {
+                    [self showMatchingControllerForNewGame:YES];
+                }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"View/Select Games"
+            style:UIAlertActionStyleDefault
+            handler:
+                ^(UIAlertAction *action)
+                {
+                    [self showMatchingControllerForNewGame:NO];
+                }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"End Turn"
+            style:UIAlertActionStyleDefault
+            handler:
+                ^(UIAlertAction *action)
+                {
+                    [self endTurn];
+                }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+            style:UIAlertActionStyleCancel
+            handler:nil]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)showMatchingControllerForNewGame:(BOOL)newGame
+{
 	GKMatchRequest *request = [[GKMatchRequest alloc] init];
 	request.minPlayers = 2;
 	request.maxPlayers = 2;
+    request.inviteMessage = @"Please join me in a rousing game of Warp War!";
+    
+    // TODO: Can we turn on automatch?
+    
+    // BTW, default behavior is that if the user already in an active match, when this comes up it puts them in a UI to let them pick an active match.
  
+    // TODO: Encapsulate within the GameEngine???
 	GKTurnBasedMatchmakerViewController *mmvc = [[GKTurnBasedMatchmakerViewController alloc] initWithMatchRequest:request];
+    mmvc.showExistingMatches = !newGame;
 	mmvc.turnBasedMatchmakerDelegate = self;
  
 	[self presentViewController:mmvc animated:YES completion:nil];
+}
+
+- (void)endTurn
+{
+    GKTurnBasedMatch* match = [GameEngine sharedInstance].currentMatch;
+    
+    [match endTurnWithNextParticipants:@[match.participants[1], match.participants[0]]
+            turnTimeout:GKTurnTimeoutNone
+            matchData:[@"matchData" dataUsingEncoding:NSUTF8StringEncoding]
+            completionHandler:nil];
+}
+
+- (IBAction)didPressSaveGame:(id)sender
+{
+    [[GameEngine sharedInstance].currentGame save]; // TODO: Handle return value if needed
 }
 
 #pragma mark - UIScrollViewDelegate delegate methods
@@ -155,16 +280,37 @@
 - (void)turnBasedMatchmakerViewController:(GKTurnBasedMatchmakerViewController *)viewController didFindMatch:(GKTurnBasedMatch *)match
 {
 	[self dismissViewControllerAnimated:YES completion:nil];
+    
+    // Also called when user selects on of the matches they are in (even if it's the current one).
+
+    // TODO: Should really handle errors in completion block
+    [GKNotificationBanner showBannerWithTitle:@"Selected/New Match!"
+            message:[NSString stringWithFormat:@"Between %@ and %@", match.participants[0], match.participants[1]]
+            completionHandler:nil];
+    
+    [GameEngine sharedInstance].currentMatch = match;
 }
 
 - (void)turnBasedMatchmakerViewController:(GKTurnBasedMatchmakerViewController *)viewController didFailWithError:(NSError *)error
 {
 	[self dismissViewControllerAnimated:YES completion:nil];
+    
+    NSLog(@"Error in %@: %@", NSStringFromSelector(_cmd), error);
 }
 
 -(void)turnBasedMatchmakerViewController:(GKTurnBasedMatchmakerViewController *)viewController playerQuitForMatch:(GKTurnBasedMatch *)match
 {
+    // Called when the user forfeits a match
+    
 	[self dismissViewControllerAnimated:YES completion:nil];
+    
+    // TODO: Need to call the quit-out-of-turn method here?
+    
+    [match participantQuitInTurnWithOutcome:GKTurnBasedMatchOutcomeQuit
+            nextParticipants:@[match.participants[0]] // Is this safe? Is there some simpler way to do this?
+            turnTimeout:GKTurnTimeoutNone
+            matchData:[@"matchData" dataUsingEncoding:NSUTF8StringEncoding]
+            completionHandler:nil];
 }
 
 @end

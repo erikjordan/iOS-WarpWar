@@ -9,14 +9,23 @@
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
 
+#import "Game.h"
+
 // Notification names
 extern NSString* const GameCenterLoginNeededName;
 
 @interface GameEngine : NSObject
 
 @property GKLocalPlayer* authenticatedPlayer;
+
 @property BOOL authenticationNeeded;
+
 @property UIViewController* authenticationViewController;
+
+@property Game* currentGame;
+
+@property GKTurnBasedMatch* currentMatch;
+
 
 + (GameEngine*) sharedInstance;
 

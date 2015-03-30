@@ -14,6 +14,8 @@
 		03AD14091800F2180007BF61 /* HexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03AD14081800F2180007BF61 /* HexView.m */; };
 		03B494181AAD0EE9004DBE1D /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B494171AAD0EE9004DBE1D /* Player.m */; };
 		03B494191AAD0EE9004DBE1D /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B494171AAD0EE9004DBE1D /* Player.m */; };
+		03BE21151AC844200031FF26 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BE21141AC844200031FF26 /* Game.m */; };
+		03BE21181AC8455B0031FF26 /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BE21171AC8455B0031FF26 /* Ship.m */; };
 		03E0FE4C17FFB114006F9451 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03E0FE4B17FFB114006F9451 /* Foundation.framework */; };
 		03E0FE4E17FFB114006F9451 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03E0FE4D17FFB114006F9451 /* CoreGraphics.framework */; };
 		03E0FE5017FFB114006F9451 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03E0FE4F17FFB114006F9451 /* UIKit.framework */; };
@@ -54,6 +56,10 @@
 		03AD14081800F2180007BF61 /* HexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexView.m; sourceTree = "<group>"; };
 		03B494161AAD0EE9004DBE1D /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		03B494171AAD0EE9004DBE1D /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		03BE21131AC844200031FF26 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		03BE21141AC844200031FF26 /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		03BE21161AC8455B0031FF26 /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
+		03BE21171AC8455B0031FF26 /* Ship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ship.m; sourceTree = "<group>"; };
 		03E0FE4817FFB114006F9451 /* iOS WarpWar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS WarpWar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03E0FE4B17FFB114006F9451 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		03E0FE4D17FFB114006F9451 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -120,10 +126,14 @@
 		03AD14051800F1820007BF61 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				03BE21131AC844200031FF26 /* Game.h */,
+				03BE21141AC844200031FF26 /* Game.m */,
 				036A0C1D1A0C6C13009DA91E /* GameEngine.h */,
 				036A0C1E1A0C6C13009DA91E /* GameEngine.m */,
 				03B494161AAD0EE9004DBE1D /* Player.h */,
 				03B494171AAD0EE9004DBE1D /* Player.m */,
+				03BE21161AC8455B0031FF26 /* Ship.h */,
+				03BE21171AC8455B0031FF26 /* Ship.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -402,10 +412,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03BE21151AC844200031FF26 /* Game.m in Sources */,
 				03B494181AAD0EE9004DBE1D /* Player.m in Sources */,
 				0301A25D1A2BB83900AE9ABE /* ShipViewController.m in Sources */,
 				03AD14091800F2180007BF61 /* HexView.m in Sources */,
 				03E0FE6217FFB114006F9451 /* MapViewController.m in Sources */,
+				03BE21181AC8455B0031FF26 /* Ship.m in Sources */,
 				0301A2601A2BF54800AE9ABE /* ShipEditController.m in Sources */,
 				03E0FE5C17FFB114006F9451 /* AppDelegate.m in Sources */,
 				036A0C1F1A0C6C13009DA91E /* GameEngine.m in Sources */,

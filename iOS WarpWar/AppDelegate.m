@@ -18,7 +18,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	[[GameEngine sharedInstance] start];
+    [Parse setApplicationId:@"x3iSx1sQyIVwi6r4CKRPwo68M747RGUoDK7UgWNy"
+            clientKey:@"hjRYeWpu9nNE83yf3snbDXYUj5fHvzHBCn9Sn5hQ"];
+
+    [[GameEngine sharedInstance] start];
 	
 	[application setStatusBarStyle:UIStatusBarStyleLightContent];
 	

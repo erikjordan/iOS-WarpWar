@@ -9,6 +9,11 @@
 #import <Parse/PFObject+Subclass.h>
 #import "Player.h"
 
+@interface Player() <PFSubclassing>
+
+@end
+
+
 @implementation Player
 
 @dynamic name, pointsAvailable, nickname; // TODO: Should we specify backing store name here?

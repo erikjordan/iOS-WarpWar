@@ -10,6 +10,11 @@
 
 @interface HexView : UIView
 
+// TODO: May not be needed any more.
 - (CGPoint) roundToHexCenter:(CGPoint)point;
+
+- (NSIndexPath*)roundToOffsetFromPixelCoordinates:(CGPoint)point;
+
+- (CGPoint)pointFromOffsetX:(NSUInteger)offsetX offsetY:(NSUInteger)offsetY;
 
 @end

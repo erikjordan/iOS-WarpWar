@@ -8,9 +8,26 @@
 
 #import "GameEngine.h"
 
-NSString* const GameCenterLoginNeededName = @"GameCenterLoginNeededName";
+@interface GameEngine() <GKLocalPlayerListener>
+
+@end
 
 @implementation GameEngine
+
+NSString* const GameCenterLoginNeededName = @"GameCenterLoginNeededName";
+
+/*
+ Approach notes:
+ 
+ Turn-based matches: https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/GameKit_Guide/ImplementingaTurn-BasedMatch/ImplementingaTurn-BasedMatch.html#//apple_ref/doc/uid/TP40008304-CH15-SW1
+ Match data limit: 64k
+ Use foreground notifications to do real-time UI updates: https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/GameKit_Guide/ImplementingaTurn-BasedMatch/ImplementingaTurn-BasedMatch.html#//apple_ref/doc/uid/TP40008304-CH15-SW8
+ 
+ 
+ 
+ 
+ */
+
 
 // TODO: May want logic around auth moved to separate class.
 
@@ -67,5 +84,27 @@ NSString* const GameCenterLoginNeededName = @"GameCenterLoginNeededName";
 				}
 			};
 }
+
+#pragma mark - GKLocalPlayerListener implementation
+
+-(void)player:(GKPlayer *)player receivedTurnEventForMatch:(GKTurnBasedMatch *)match didBecomeActive:(BOOL)didBecomeActive
+{
+    [GKNotificationBanner showBannerWithTitle:@"Turn Event" message:[NSString stringWithFormat:@"Did become active: %d", (int)didBecomeActive] completionHandler:nil];
+    
+    // Important things to handle:
+    // 1) It's now this player's turn
+    // 2) Other player saved game data
+}
+
+- (void)player:(GKPlayer *)player didAcceptInvite:(GKInvite *)invite
+{
+    
+}
+
+- (void)player:(GKPlayer *)player matchEnded:(GKTurnBasedMatch *)match
+{
+    
+}
+
 
 @end

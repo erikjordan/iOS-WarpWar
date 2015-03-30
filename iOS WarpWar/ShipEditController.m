@@ -55,7 +55,7 @@
 	
 	self.pointsLeftLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
 	self.pointsLeftLabel.font = [UIFont systemFontOfSize:12];
-	self.pointsLeftLabel.text = [NSString stringWithFormat:@"Remaining Build Points: %d", self.availableBuildPoints];
+	self.pointsLeftLabel.text = [NSString stringWithFormat:@"Remaining Build Points: %lu", (unsigned long)self.availableBuildPoints];
 	
 	UIView* infoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
 	[infoView addSubview:self.pointsLeftLabel];
@@ -79,7 +79,7 @@
 {
 	// Adjust the remaining build points count
 	self.remainingPoints = self.availableBuildPoints - [self totalPointsSpent];
-	self.pointsLeftLabel.text = [NSString stringWithFormat:@"Remaining Build Points: %d", self.remainingPoints];
+	self.pointsLeftLabel.text = [NSString stringWithFormat:@"Remaining Build Points: %lu", (unsigned long)self.remainingPoints];
 	
 	// Reset the max values for all steppers
 	NSEnumerator *enumerator = [self.stepperLabel keyEnumerator];
